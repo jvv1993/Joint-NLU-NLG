@@ -83,7 +83,7 @@ class DualVAE(nn.Module):
 		self.set_optimizer()
 		self._step = 0
 		if torch.cuda.is_available():
-			self.cuda()
+		    self.cuda()
 
 
 #	def load_pretrain_lm(self):

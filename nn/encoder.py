@@ -11,6 +11,7 @@ class RNN(nn.Module):
 		self.num_di = 2 if bidirectional else 1
 		self.hidden_size = hidden_size
 		self.num_layers = num_layers
+		self.cuda()
 
 
 	def forward(self, input_var, input_len, init_state=None):
@@ -49,6 +50,7 @@ class SentEncoder(nn.Module):
 		self.dropout = nn.Dropout(p=dropout)
 		self.embed = nn.Embedding(input_size, embed_size)
 		self.rnn = RNN(embed_size, hidden_size, num_layers=num_layers, dropout=dropout, bidirectional=bidirectional)
+		self.cuda()
 
 	def forward(self, input_var, input_len, init_state=None):
 		'''

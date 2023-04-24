@@ -15,6 +15,7 @@ class Hidden2Gaussian(nn.Module):
 		self.mu = nn.Linear(input_size, output_size)
 		self.logvar = nn.Linear(input_size, output_size)
 		self.config = config
+		self.cuda()
 
 	def forward(self, enc_out, src, batch):
 		'''

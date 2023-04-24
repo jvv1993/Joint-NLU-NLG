@@ -1,6 +1,4 @@
 import sys
-print("blablabla")
-print(sys.path)
 import argparse
 import time
 import os
@@ -354,6 +352,8 @@ def set_seed(args):
 	torch.backends.cudnn.benchmark = False
 
 if __name__ == '__main__':
+	print("blablabla")
+	print(sys)
 	# load config
 	config = get_config()
 	set_seed(config)

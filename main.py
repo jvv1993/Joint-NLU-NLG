@@ -6,6 +6,7 @@ import json
 import random
 import torch
 import numpy as np
+import logging 
 from data import DataLoader
 from utils.metric import weather_metric, e2e_metric
 sys.path.insert(0, './nn')
@@ -352,24 +353,29 @@ def set_seed(args):
 	torch.backends.cudnn.benchmark = False
 
 if __name__ == '__main__':
-	print("blablabla")
-	print(sys)
-	# load config
-	config = get_config()
-	set_seed(config)
+  logger = logging.getLogger(__name__)
+  handler = logging.FileHandler('jvvlog.txt')
+  formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+  handler.setFormatter(formatter)
+  logger.addHandler(handler)
+  logger.setLevel(logging.DEBUG)
+  logger.debug("blablabla")
+  logger.debug(sys)
+  config = get_config()
+  set_seed(config)
 
-	# load data
-	dataset = DataLoader(config)
+  # load data
+  dataset = DataLoader(config)
 
-	# construct models, different model structure for different dataset
-	if config.dataset == 'e2e':
-		model = DualVAE_classify(config, dataset)
-	else:
-		model = DualVAE(config, dataset)
-	model = model.cuda()
-	
-	# start training / testing
-	if config.mode == 'pretrain' or config.mode == 'finetune':
-		trainIter(config, dataset, model)
-	else: # test
-		test(config, dataset, model)
+  # construct models, different model structure for different dataset
+  if config.dataset == 'e2e':
+    model = DualVAE_classify(config, dataset)
+  else:
+    model = DualVAE(config, dataset)
+  model = model.cuda()
+
+  # start training / testing
+  if config.mode == 'pretrain' or config.mode == 'finetune':
+    trainIter(config, dataset, model)
+  else: # test
+    test(config, dataset, model)

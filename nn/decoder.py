@@ -11,7 +11,8 @@ from attention import Attn
 class Decoder(nn.Module):
 	def __init__(self, config, input_size, embed_size, hidden_size, vocab, idx2word, num_layers=1, dropout=0.5, use_attn=True, use_peep=True, dec_len=50):
 		super(Decoder, self).__init__()
-		self.config = config
+		self.cuda()
+    self.config = config
 		self.input_size = input_size
 		self.embed_size = embed_size
 		self.hidden_size = hidden_size
@@ -49,10 +50,12 @@ class Decoder(nn.Module):
 		self.word2idx = vocab
 		self.idx2word = idx2word
 		self.dec_len = dec_len
+    
 
 
 	def _step(self, input_emb, init_state, latent_var, enc_output, enc_mask, hiddens, t, source):
-		output, state = self.rnn(input_emb, init_state) # (B, 1, H) & (L, B, H)
+		self.cuda()
+    output, state = self.rnn(input_emb, init_state) # (B, 1, H) & (L, B, H)
 		if self.use_attn:
 			attn_dist, ctx_vec = self.attn[source](output, enc_output, enc_mask) # (B, T) & (B, H)
 			if self.mode == 'teacher_force': # only dropout attention during training
@@ -83,6 +86,7 @@ class Decoder(nn.Module):
 		Return:
 			output_prob: (B, T, V)
 		'''
+    self.cuda()
 		self.batch_size = init_state[0].size(1)
 		max_len = self.dec_len if mode == 'gen' else input_var.size(1)
 		assert mode == 'teacher_force' or mode == 'gen'

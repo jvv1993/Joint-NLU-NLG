@@ -1,4 +1,5 @@
 import sys
+print(sys.path)
 import argparse
 import time
 import os

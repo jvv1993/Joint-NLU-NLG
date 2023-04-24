@@ -21,7 +21,7 @@ class RNN(nn.Module):
 		'''
 		batch_size, _, _ = input_var.size()
 		# NOTE: set enforce_sorted True to avoid sorting
-		input_var = nn.utils.rnn.pack_padded_sequence(input_var, input_len, batch_first=True, enforce_sorted=False)
+		input_var = nn.utils.rnn.pack_padded_sequence(input_var, input_len.gpu(), batch_first=True, enforce_sorted=False)
 
 		# output shape: (batch, seq_len, num_directions * hidden_size)
 		# state (h, c) shape: (num_layers * num_directions, batch, hidden_size)

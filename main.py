@@ -360,7 +360,7 @@ if __name__ == '__main__':
   logger.addHandler(handler)
   logger.setLevel(logging.DEBUG)
   logger.debug("blablabla")
-  logger.debug(sys)
+  logger.debug(sys.path)
   config = get_config()
   set_seed(config)
 

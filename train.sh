@@ -25,6 +25,12 @@ elif [ "$dataset" = "weather" ]; then
 	dropout_attn_prob=0
 	compute_z='last'
 	peep='False'
+else; then
+	vocab=1200
+	auto_weight=0
+	dropout_attn_prob=0.9
+	compute_z='mean'
+	peep='True'
 fi
 
 ####### pretrain the model using supervised learning first #######

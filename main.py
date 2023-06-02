@@ -370,9 +370,11 @@ if __name__ == '__main__':
   # construct models, different model structure for different dataset
   if config.dataset == 'e2e':
     model = DualVAE_classify(config, dataset)
-  else:
+  elif config.dataset == 'tree':
     model = DualVAE(config, dataset)
-  model = model.cuda()
+  else:
+    model = DualSentiment(config,dataset)
+    model = model.cuda()
 
   # start training / testing
   if config.mode == 'pretrain' or config.mode == 'finetune':

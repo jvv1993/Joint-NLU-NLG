@@ -55,26 +55,26 @@ class Decoder(nn.Module):
 
     def _step(self, input_emb, init_state, latent_var, enc_output, enc_mask, hiddens, t, source):
         self.cuda()
-    output, state = self.rnn(input_emb, init_state) # (B, 1, H) & (L, B, H)
-    if self.use_attn:
-        attn_dist, ctx_vec = self.attn[source](output, enc_output, enc_mask) # (B, T) & (B, H)
-        if self.mode == 'teacher_force': # only dropout attention during training
-            if self.config.dropout_attn_level == 'step' and \
-                (random.randint(0, 100000) % 100+1) / 100 <= self.config.dropout_attn_prob:
-                ctx_vec = torch.zeros(*ctx_vec.size()).cuda()
-            elif self.config.dropout_attn_level == 'unit':
-                ctx_vec = self.dropout_on_attn(ctx_vec)
-        output = torch.cat([output.squeeze(1), ctx_vec], dim=1) # (B, V)
-    else:
-        output = output.squeeze(1)
-    if self.use_peep:
-        output = torch.cat([output, latent_var], dim=1)
+        output, state = self.rnn(input_emb, init_state) # (B, 1, H) & (L, B, H)
+        if self.use_attn:
+            attn_dist, ctx_vec = self.attn[source](output, enc_output, enc_mask) # (B, T) & (B, H)
+            if self.mode == 'teacher_force': # only dropout attention during training
+                if self.config.dropout_attn_level == 'step' and \
+                    (random.randint(0, 100000) % 100+1) / 100 <= self.config.dropout_attn_prob:
+                    ctx_vec = torch.zeros(*ctx_vec.size()).cuda()
+                elif self.config.dropout_attn_level == 'unit':
+                    ctx_vec = self.dropout_on_attn(ctx_vec)
+            output = torch.cat([output.squeeze(1), ctx_vec], dim=1) # (B, V)
+        else:
+            output = output.squeeze(1)
+        if self.use_peep:
+            output = torch.cat([output, latent_var], dim=1)
 
-    if self.use_attn:
-        output = self.out[source](output) # (B, V)
-    else:
-        output = self.out(output) # (B, V)
-    return output, state
+        if self.use_attn:
+            output = self.out[source](output) # (B, V)
+        else:
+            output = self.out(output) # (B, V)
+        return output, state
 
     def forward(self, input_var, init_state, latent_var, enc_output, enc_mask, mode='teacher_force', sample=False, source='none'):
         '''

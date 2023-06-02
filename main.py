@@ -324,7 +324,7 @@ def get_config(): # TODO: clean config when checking hyper-parameters
 		assert args.unsup_update_ratio >= 1
 		assert args.unsup_source in ['both', 'parse', 'query']
 	assert args.mode in ['pretrain', 'test', 'finetune']
-	assert args.dataset in ['e2e', 'weather']
+	assert args.dataset in ['e2e', 'weather','yelp']
 	assert args.dropout_attn_level in ['step', 'unit']
 	assert args.compute_z in ['mean', 'last']
 

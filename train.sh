@@ -25,7 +25,7 @@ elif [ "$dataset" = "weather" ]; then
 	dropout_attn_prob=0
 	compute_z='last'
 	peep='False'
-else; then
+else
 	vocab=1200
 	auto_weight=0
 	dropout_attn_prob=0.9

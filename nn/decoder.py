@@ -12,7 +12,7 @@ class Decoder(nn.Module):
 	def __init__(self, config, input_size, embed_size, hidden_size, vocab, idx2word, num_layers=1, dropout=0.5, use_attn=True, use_peep=True, dec_len=50):
 		super(Decoder, self).__init__()
 		self.cuda()
-    self.config = config
+        self.config = config
 		self.input_size = input_size
 		self.embed_size = embed_size
 		self.hidden_size = hidden_size

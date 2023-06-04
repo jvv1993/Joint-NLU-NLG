@@ -55,9 +55,10 @@ log='res/log/'$mode'/'$model_name'.log'
 mkdir -p $fine_model_dir
 cp $model_dir'/epoch-best.pt' $fine_model_dir'/epoch-best.pt'
 #unlabel_nl='data/'$dataset'_ratio/'$ratio'/unlabel_nl.tsv' # can also use reuse_nl.tsv for reusing labelled data
-unlabel_nl= '/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
 #unlabel_mr='data/'$dataset'_ratio/'$ratio'/unlabel_mr.tsv' # can also use reuse_mr.tsv for reusing labelled data
-unlabel_mr = '/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
+unlabel_nl='/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
+unlabel_mr='/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
+
 unsup_source='both'
 python3 main.py --dataset=$dataset --mode=$mode --batch_size=$batch_size --seed=$seed \
 				--train_path=$train_path --valid_path=$valid_path --test_path=$test_path \

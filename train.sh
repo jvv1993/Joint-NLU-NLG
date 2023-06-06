@@ -6,11 +6,11 @@ dim=$4 # 150 / 300
 seed=$5
 
 # data path
-train_path='content/data/'$dataset'_ratio/'$ratio'/train.tsv'
-valid_path='content/data/'$dataset'/dev.tsv'
-test_path='content/data/'$dataset'/test.tsv'
-word2count_mr='content/data/'$dataset'/word2count_mr.json' # word count of meaning representation
-word2count_nl='content/data/'$dataset'/word2count_nl.json' # word count of natural language
+train_path='/content/data/'$dataset'_ratio/'$ratio'/train.tsv'
+valid_path='/content/data/'$dataset'/dev.tsv'
+test_path='/content/data/'$dataset'/test.tsv'
+word2count_mr='/content/data/'$dataset'/word2count_mr.json' # word count of meaning representation
+word2count_nl='/content/data/'$dataset'/word2count_nl.json' # word count of natural language
 
 # some dataset-dependent hyper-parameters as default
 if [ "$dataset" = "e2e" ]; then

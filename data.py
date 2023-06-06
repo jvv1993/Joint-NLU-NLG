@@ -51,10 +51,12 @@ class DataLoader():
 		self.vocab['query'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for query
 		with open(self.config.word2count_query) as f:
 			word2count = json.load(f)
-		for i in range(min(self.config.vocab_size, len(word2count))):
-			print(word2count)
-			w = word2count[i][0]
-			self.vocab['query'][w] = len(self.vocab['query'])
+		for w, count in word2count.items():
+			if len(self.vocab['query']) < self.config.vocab_size:
+				print(w, count)
+				self.vocab['query'][w] = len(self.vocab['query'])
+			else:
+				break
 
 		self.vocab['parse'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for parse
 		with open(self.config.word2count_parse) as f:

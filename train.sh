@@ -44,7 +44,7 @@ python3 main.py --dataset=$dataset --mode=$mode --batch_size=$batch_size --seed=
 				--word2count_query=$word2count_nl --word2count_parse=$word2count_mr --vocab_size=$vocab \
 				--embed_size=$dim --hidden_size=$dim --latent_size=$dim \
 				--epoch=100 --no_improve_epoch=10 --model_dir=$model_dir --result_path=$result \
-				--auto_weight=$auto_weight --compute_z=$compute_z --peep=$peep --dropout_attn_prob=$dropout_attn_prob > $log
+				--auto_weight=$auto_weight --compute_z=$compute_z --peep=$peep --dropout_attn_prob=$dropout_attn_prob > $log 2>&1
 
 
 ####### finetune the model using semi-supervised learning #######
@@ -60,11 +60,12 @@ unlabel_nl='/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
 unlabel_mr='/content/drive/MyDrive/Mthesis/yelp_academic_dataset_review[1].json'
 
 unsup_source='both'
-python3 main.py --dataset=$dataset --mode=$mode --batch_size=$batch_size --seed=$seed \
+python3 main.py --dataset=$dataset --mode=$mode --batch_size = $batch_size --seed=$seed \
 				--train_path=$train_path --valid_path=$valid_path --test_path=$test_path \
                 --word2count_query=$word2count_nl --word2count_parse=$word2count_mr --vocab_size=$vocab \
                 --embed_size=$dim --hidden_size=$dim --latent_size=$dim --kl_anneal_type='none' \
                 --epoch=150 --no_improve_epoch=50 --model_dir=$fine_model_dir --result_path=$result \
                 --auto_weight=$auto_weight --rl_weight=1 --rec_weight=1 \
 				--compute_z=$compute_z --peep=$peep --dropout_attn_prob=$dropout_attn_prob \
-                --unsup_learn=true --unsup_source=$unsup_source --unsup_query_path=$unlabel_nl --unsup_parse_path=$unlabel_mr > $log
+                --unsup_learn=true --unsup_source=$unsup_source --unsup_query_path=$unlabel_nl --unsup_parse_path=$unlabel_mr > $log 2>&1
+

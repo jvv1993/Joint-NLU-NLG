@@ -173,7 +173,8 @@ class DataLoader():
 		else:
 			batch['run_auto'] = {'query': False, 'parse': False}
 		print("self.p: ", self.p)
-		print("self.data: ", self.data)
+		print("self.data: ", self.data[dType][self.p[dType]])
+		print("self.data: ", self.data[dType][self.p[dType]]['query'])
 		print("x_idx: ", x_idx)
 		print("x_mask: ", x_mask)
 		print("y_idx: ", y_idx)

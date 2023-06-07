@@ -31,32 +31,14 @@ class DataLoader():
 		with open(self.config.ontology) as f:
 			self.ontology = json.load(f)
 
-	# def build_vocab(self):
-	# 	self.vocab = {}
-	# 	self.vocab['query'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for query
-	# 	with open(self.config.word2count_query) as f:
-	# 		word2count = json.load(f)
-	# 	for i in range(min(self.config.vocab_size, len(word2count))):
-	# 		w = word2count[i][0]
-	# 		self.vocab['query'][w] = len(self.vocab['query'])
-
-	# 	self.vocab['parse'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for parse
-	# 	with open(self.config.word2count_parse) as f:
-	# 		word2count = json.load(f)
-	# 	for i in range(min(self.config.vocab_size, len(word2count))):
-	# 		w = word2count[i][0]
-	# 		self.vocab['parse'][w] = len(self.vocab['parse'])
 	def build_vocab(self):
 		self.vocab = {}
 		self.vocab['query'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for query
 		with open(self.config.word2count_query) as f:
 			word2count = json.load(f)
-		for w, count in word2count.items():
-			if len(self.vocab['query']) < self.config.vocab_size:
-				print(w, count)
-				self.vocab['query'][w] = len(self.vocab['query'])
-			else:
-				break
+		for i in range(min(self.config.vocab_size, len(word2count))):
+			w = word2count[i][0]
+			self.vocab['query'][w] = len(self.vocab['query'])
 
 		self.vocab['parse'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for parse
 		with open(self.config.word2count_parse) as f:
@@ -64,6 +46,24 @@ class DataLoader():
 		for i in range(min(self.config.vocab_size, len(word2count))):
 			w = word2count[i][0]
 			self.vocab['parse'][w] = len(self.vocab['parse'])
+	# def build_vocab(self):
+	# 	self.vocab = {}
+	# 	self.vocab['query'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for query
+	# 	with open(self.config.word2count_query) as f:
+	# 		word2count = json.load(f)
+	# 	for w, count in word2count.items():
+	# 		if len(self.vocab['query']) < self.config.vocab_size:
+	# 			print(w, count)
+	# 			self.vocab['query'][w] = len(self.vocab['query'])
+	# 		else:
+	# 			break
+
+	# 	self.vocab['parse'] = {'<PAD>': 0, '<SOS>': 1, '<EOS>': 2, '<UNK>': 3} # word2id for parse
+	# 	with open(self.config.word2count_parse) as f:
+	# 		word2count = json.load(f)
+	# 	for i in range(min(self.config.vocab_size, len(word2count))):
+	# 		w = word2count[i][0]
+	# 		self.vocab['parse'][w] = len(self.vocab['parse'])
 
 
 	def next_batch(self, dType):

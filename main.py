@@ -10,8 +10,8 @@ import logging
 from data import DataLoader
 from utils.metric import weather_metric, e2e_metric
 sys.path.insert(0, './nn')
-#from dualVAE import DualVAE
-#from dualVAE_classify import DualVAE_classify
+from dualVAE import DualVAE
+from dualVAE_classify import DualVAE_classify
 import DualSentiment
 
 def	update_once_unsup(dataset, model, log, unsup_type):

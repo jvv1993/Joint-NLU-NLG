@@ -371,6 +371,7 @@ if __name__ == '__main__':
   # construct models, different model structure for different dataset
   if config.dataset == 'e2e':
     model = DualVAE_classify(config, dataset)
+    model = model.cuda()
   elif config.dataset == 'tree':
     model = DualVAE(config, dataset)
   else:

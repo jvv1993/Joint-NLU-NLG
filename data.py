@@ -37,7 +37,7 @@ class DataLoader():
 		with open(self.config.word2count_query) as f:
 			word2count = json.load(f)
 		for i in range(min(self.config.vocab_size, len(word2count))):
-			print(w)
+			print(wordcount)
 			w = word2count[i][0]
 			self.vocab['query'][w] = len(self.vocab['query'])
 

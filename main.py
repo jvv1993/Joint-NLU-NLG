@@ -375,7 +375,7 @@ if __name__ == '__main__':
   elif config.dataset == 'tree':
     model = DualVAE(config, dataset)
   else:
-    model = DualSentiment(config,dataset)
+    model = DualVAE_classify(config, dataset)
     model = model.cuda()
 
   # start training / testing
